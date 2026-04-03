@@ -1,0 +1,85 @@
+:root {
+    --bg-dark: #000000;
+    --accent-purple: #a855f7;
+    --accent-blue: #007aff;
+    --text-muted: #888888;
+    --white-glow: rgba(255, 255, 255, 0.7);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+body { background-color: var(--bg-dark); color: white; overflow-x: hidden; }
+
+/* FONDO DINÁMICO */
+.dynamic-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
+.blob { position: absolute; width: 700px; height: 700px; border-radius: 50%; filter: blur(100px); opacity: 0.15; transition: transform 0.3s ease-out; }
+.blob-1 { background: var(--accent-purple); top: -100px; left: -100px; }
+.blob-2 { background: var(--accent-blue); bottom: -100px; right: -100px; }
+.blob-3 { background: #ff00ff; top: 40%; left: 30%; opacity: 0.05; }
+
+.main-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* HERO */
+.hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.main-title { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; letter-spacing: -2px; }
+.gradient-text { background: linear-gradient(90deg, var(--accent-purple), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { font-size: 1.2rem; color: var(--text-muted); margin: 30px auto 60px; max-width: 650px; }
+
+/* BOTÓN LETS TALK Y PAQUETES (UNIFICADO) */
+.btn-talk, .price-box {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #222;
+}
+
+.btn-talk { 
+    text-decoration: none; color: white; padding: 18px 50px; border-radius: 50px; 
+    font-weight: 700; background: rgba(255, 255, 255, 0.03); display: inline-block;
+}
+
+/* Efecto al pasar mouse o click */
+.btn-talk:hover, .btn-talk:active,
+.price-box:hover, .price-box:active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 35px var(--white-glow);
+    transform: translateY(-10px) scale(1.05); /* Zoom y elevación */
+}
+
+/* Ajuste específico para que el texto de los paquetes no desaparezca al volverse blancos */
+.price-box:hover h3, .price-box:hover .cost, .price-box:hover li { color: #000; }
+.price-box:hover li::before { color: #000; }
+
+/* CARDS */
+.section-title { text-align: center; font-size: 2.5rem; margin: 120px 0 60px; font-weight: 800; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+.card { background: rgba(15, 15, 15, 0.6); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid #222; cursor: zoom-in; overflow: hidden; transition: 0.4s; }
+.card:hover { border-color: var(--accent-purple); transform: translateY(-5px); }
+.card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; }
+.card:hover img { opacity: 1; }
+.card-info { padding: 20px; }
+
+/* PRICING */
+.pricing-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; padding-bottom: 100px; }
+.price-box { 
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(15px); 
+    padding: 45px; border-radius: 25px; width: 320px; text-align: center; 
+}
+.cost { font-size: 3.5rem; font-weight: 900; margin: 20px 0; display: block; transition: 0.3s; }
+.price-box h3 { transition: 0.3s; }
+.price-box ul { list-style: none; text-align: left; transition: 0.3s; }
+.price-box li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: center; }
+.price-box li::before { content: "✓ "; color: var(--accent-purple); margin-right: 10px; font-weight: 800; }
+
+/* MODAL */
+.modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; }
+.modal-content { max-width: 90%; max-height: 80vh; border-radius: 10px; animation: zoom 0.3s; }
+@keyframes zoom { from {transform: scale(0.7)} to {transform: scale(1)} }
+.close-modal { position: absolute; top: 20px; right: 30px; font-size: 40px; color: white; cursor: pointer; }
+
+.main-footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid #111; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .pricing-container { flex-direction: column; align-items: center; }
+    .price-box { width: 100%; }
+}
